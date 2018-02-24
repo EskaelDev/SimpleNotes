@@ -1,4 +1,4 @@
-package com.example.tomek.simplenotes;
+package com .example.tomek.simplenotes;
 
 import android.graphics.Color;
 
