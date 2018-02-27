@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appBG1"
 
     android:orientation="vertical"
     android:weightSum="10"
@@ -15,7 +16,11 @@
         android:layout_weight="1"
         android:hint="Titile"
         android:layout_gravity="top"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textColor="@color/appText"
+        android:textColorHint="@color/appHint"
+        android:backgroundTint="@color/appLabelBG"
+        />
 
     <EditText
         android:id="@+id/new_note_content"
@@ -25,6 +30,9 @@
         android:gravity="top"
         android:layout_gravity="center"
         android:inputType="textMultiLine"
+        android:hint="note content"
+        android:textColorHint="@color/appHint"
+        android:textColor="@color/appText"
         />
 
 

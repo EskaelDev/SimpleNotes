@@ -91,7 +91,7 @@ public class NewNoteActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            FileIO.DeleteNote(getApplicationContext(), loadedNote.getTitle() + " " + loadedNote.getSaveDate() + FileIO.FILE_EXTENSION);
+                            FileIO.DeleteNote(getApplicationContext(), loadedNote.getSaveDate() + FileIO.FILE_EXTENSION);
                             Toast.makeText(getApplicationContext(),
                                     loadedNote.getTitle() + " deleted",
                                     Toast.LENGTH_SHORT).show();

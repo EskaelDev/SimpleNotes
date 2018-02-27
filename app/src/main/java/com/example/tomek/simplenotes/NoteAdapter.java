@@ -1,5 +1,6 @@
 package com.example.tomek.simplenotes;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
@@ -36,8 +38,13 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             TextView date = convertView.findViewById(R.id.item_note_date);
             TextView content = convertView.findViewById(R.id.item_note_content);
 
+            DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getContext());
+            DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getContext());
+
             title.setText(note.getTitle());
-            date.setText(note.getSaveDate().toString());
+            date.setText(dateFormat.format(note.getSaveDate()));
+            date.append("  ");
+            date.append(timeFormat.format(note.getSaveDate()));
             if (note.getContent().length() > Constants.MAX_NOTE_CONTENT_LENGTH) {
                 if (note.getContent().charAt(Constants.MAX_NOTE_CONTENT_LENGTH - 1) == ' ') {
                     content.setText(note.getContent().substring(0, Constants.MAX_NOTE_CONTENT_LENGTH - 1));

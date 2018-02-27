@@ -21,7 +21,7 @@ public class FileIO {
     public static final String FILE_EXTENSION = ".snt";
 
     public static boolean SaveNote(Context context, Note note) {
-        String filename = String.valueOf(note.getTitle()) + " " + String.valueOf(note.getSaveDate()) + FILE_EXTENSION;
+        String filename = String.valueOf(String.valueOf(note.getSaveDate()) + FILE_EXTENSION);
 
         FileOutputStream fileOutS;
         ObjectOutputStream objOutS;

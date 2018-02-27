@@ -3,4 +3,21 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+
+    <color name="pinCircleBorder">#FF4081</color>
+    <color name="pinCircleFill">#FF4081</color>
+    <color name="pinBG">#FF4081</color>
+    <color name="pinKeyBG">#FF4081</color>
+
+    <!--Adobe Wheel-->
+    <color name="appBG1">#1A2530</color>
+    <color name="appBG2">#2C3E50</color>
+    <color name="appBG3">#34495E</color>
+    <color name="appLabelBG">#E74C3C</color>
+    <color name="appText">#FFFFFF</color>
+    <color name="appHint">#acacac</color>
+
+
 </resources>

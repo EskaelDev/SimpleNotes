@@ -37,6 +37,10 @@ public class NotesListActivity extends AppCompatActivity {
                 Intent noteIntent = new Intent(this, NewNoteActivity.class);
                 startActivity(noteIntent);
                 break;
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                break;
         }
         return true;
     }
@@ -57,7 +61,7 @@ public class NotesListActivity extends AppCompatActivity {
             notesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String fileName = ((Note)notesList.getItemAtPosition(i)).getTitle()+ " " + ((Note)notesList.getItemAtPosition(i)).getSaveDate() + FileIO.FILE_EXTENSION;
+                    String fileName = ((Note)notesList.getItemAtPosition(i)).getSaveDate() + FileIO.FILE_EXTENSION;
 
                     Intent editNoteIntent = new Intent(getApplicationContext(), NewNoteActivity.class);
                     editNoteIntent.putExtra("NOTE_FILE", fileName);

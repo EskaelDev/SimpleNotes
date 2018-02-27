@@ -1,0 +1,11 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <stroke
+        android:width="3dp"
+        android:color="@color/appLabelBG" />
+    <solid android:color="@color/appBG2" />
+    <size
+        android:width="20dp"
+        android:height="20dp" />
+
+</shape>
