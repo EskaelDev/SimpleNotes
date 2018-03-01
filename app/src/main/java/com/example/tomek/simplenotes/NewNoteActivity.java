@@ -1,18 +1,17 @@
 package com.example.tomek.simplenotes;
 
 import android.content.DialogInterface;
-import android.graphics.Color;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.File;
 import java.util.Calendar;
-import java.util.Date;
+
 
 public class NewNoteActivity extends AppCompatActivity {
 
@@ -21,6 +20,8 @@ public class NewNoteActivity extends AppCompatActivity {
 
     private String noteFileName;
     private Note loadedNote;
+
+    private String noteColor = "noBG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +53,10 @@ public class NewNoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_note_save:
-                if (noteTitle.getText().length()==0 || noteContent.getText().length() == 0) {
+                if (noteTitle.getText().length() == 0 || noteContent.getText().length() == 0) {
                     Toast.makeText(this, "Title/Content is required", Toast.LENGTH_SHORT).show();
                     break;
-                }
-                else {
+                } else {
                     SaveNote();
                     break;
                 }
@@ -70,9 +70,9 @@ public class NewNoteActivity extends AppCompatActivity {
     private void SaveNote() {
         Note note;
         if (loadedNote == null) {
-            note = new Note(noteTitle.getText().toString(), noteContent.getText().toString(), Calendar.getInstance().getTime(), "");
+            note = new Note(noteTitle.getText().toString(), noteContent.getText().toString(), Calendar.getInstance().getTime(), noteColor);
         } else {
-            note = new Note(noteTitle.getText().toString(), noteContent.getText().toString(), loadedNote.getSaveDate(), "");
+            note = new Note(noteTitle.getText().toString(), noteContent.getText().toString(), loadedNote.getSaveDate(), noteColor);
         }
         if (FileIO.SaveNote(this, note))
             Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show();
@@ -99,9 +99,26 @@ public class NewNoteActivity extends AppCompatActivity {
                         }
                     })
                     .setNegativeButton("No", null)
-            .setCancelable(false);
+                    .setCancelable(false);
 
             dialog.show();
+        }
+    }
+
+    public void colorPick(View view) {
+        switch (view.getId()) {
+            case R.id.red:
+                noteColor = "red";
+                break;
+            case R.id.yellow:
+                noteColor = "yellow";
+                break;
+            case R.id.green:
+                noteColor = "green";
+                break;
+            case R.id.blue:
+                noteColor = "blue";
+                break;
         }
     }
 }

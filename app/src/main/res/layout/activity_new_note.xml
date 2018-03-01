@@ -13,29 +13,78 @@
         android:id="@+id/new_note_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:hint="Titile"
         android:layout_gravity="top"
+        android:layout_weight="1"
+        android:backgroundTint="@color/appLabelBG"
+        android:hint="Titile"
         android:inputType="text"
         android:textColor="@color/appText"
-        android:textColorHint="@color/appHint"
-        android:backgroundTint="@color/appLabelBG"
-        />
+        android:textColorHint="@color/appHint" />
 
     <EditText
         android:id="@+id/new_note_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_weight="9"
         android:gravity="top"
-        android:layout_gravity="center"
-        android:inputType="textMultiLine"
         android:hint="note content"
-        android:textColorHint="@color/appHint"
+        android:inputType="textMultiLine"
         android:textColor="@color/appText"
-        />
+        android:textColorHint="@color/appHint" />
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/choose_note_color"
+        android:textColor="@color/appText"
+        android:textColorHint="@color/appHint" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        style="?android:attr/buttonBarStyle"
+        >
 
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/yellow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_pick_yellow"
+            android:onClick="colorPick"/>
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/red"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_pick_red"
+            android:onClick="colorPick"/>
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/blue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_pick_blue"
+            android:onClick="colorPick"/>
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/green"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_pick_green"
+            android:onClick="colorPick"/>
+
+    </LinearLayout>
 </LinearLayout>

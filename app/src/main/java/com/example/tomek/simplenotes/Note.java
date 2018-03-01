@@ -15,6 +15,7 @@ public class Note implements Serializable{
     private Date saveDate;
     private String color;
 
+
     public Note(String title, String content, Date saveDate, String color) {
         this.title = title;
         this.content = content;
@@ -34,21 +35,22 @@ public class Note implements Serializable{
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+//    public void setContent(String content) {
+//        this.content = content;
+//    }
 
     public Date getSaveDate() {
         return saveDate;
     }
 
-    public void setSaveDate(Date saveDate) {
-        this.saveDate = saveDate;
-    }
+//    public void setSaveDate(Date saveDate) {
+//        this.saveDate = saveDate;
+//    }
 
     public String getColor() {
         return color;
     }
+
 
     public void setColor(String color) {
         this.color = color;
