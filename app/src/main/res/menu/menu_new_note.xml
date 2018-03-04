@@ -22,4 +22,13 @@
         app:showAsAction="always"
 
         />
+
+
+    <item
+        android:enabled="true"
+        android:id="@+id/action_note_share"
+        app:showAsAction="always"
+        android:title="@string/share"
+        android:icon="@drawable/ic_share"/>
+        <!--app:actionProviderClass="android.widget.ShareActionProvider" />-->
 </menu>

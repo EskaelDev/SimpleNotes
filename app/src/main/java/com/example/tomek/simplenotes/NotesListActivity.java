@@ -36,11 +36,12 @@ public class NotesListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_list_new:
                 Intent noteIntent = new Intent(this, NewNoteActivity.class);
+                noteIntent.putExtra("action", "New Note");
                 startActivity(noteIntent);
                 break;
             case R.id.action_settings:
-                Intent settingsIntent = new Intent(this, SettingsActivity.class);
-                startActivity(settingsIntent);
+//                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+//                startActivity(settingsIntent);
                 break;
         }
         return true;
@@ -66,6 +67,7 @@ public class NotesListActivity extends AppCompatActivity {
 
                     Intent editNoteIntent = new Intent(getApplicationContext(), NewNoteActivity.class);
                     editNoteIntent.putExtra("NOTE_FILE", fileName);
+                    editNoteIntent.putExtra("action", "Edit Note");
                     startActivity(editNoteIntent);
                 }
             });

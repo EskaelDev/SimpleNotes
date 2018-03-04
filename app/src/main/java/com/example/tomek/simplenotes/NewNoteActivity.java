@@ -2,14 +2,17 @@ package com.example.tomek.simplenotes;
 
 import android.content.DialogInterface;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import java.util.Calendar;
 
 
@@ -22,11 +25,15 @@ public class NewNoteActivity extends AppCompatActivity {
     private Note loadedNote;
 
     private String noteColor = "noBG";
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
+
+        title = getIntent().getStringExtra("action");
+        setTitle(title);
 
         noteTitle = findViewById(R.id.new_note_title);
         noteContent = findViewById(R.id.new_note_content);
@@ -62,6 +69,9 @@ public class NewNoteActivity extends AppCompatActivity {
                 }
             case R.id.action_note_delete:
                 DeleteNote();
+                break;
+            case R.id.action_note_share:
+                ShareNote();
                 break;
         }
         return true;
@@ -109,16 +119,35 @@ public class NewNoteActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.red:
                 noteColor = "red";
+                Toast.makeText(this, "Color: " + noteColor, Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.yellow:
                 noteColor = "yellow";
+                Toast.makeText(this, "Color: " + noteColor, Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.green:
                 noteColor = "green";
+                Toast.makeText(this, "Color: " + noteColor, Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.blue:
                 noteColor = "blue";
+                Toast.makeText(this, "Color: " + noteColor, Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    public void ShareNote(){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        StringBuilder shareContent = new StringBuilder();
+        shareContent.append(noteTitle.getText().toString());
+        shareContent.append(System.getProperty("line.separator"));
+        shareContent.append(System.getProperty("line.separator"));
+        shareContent.append(noteContent.getText().toString());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent.toString());
+        startActivity(Intent.createChooser(shareIntent, "Share note"));
     }
 }
