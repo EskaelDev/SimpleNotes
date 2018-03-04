@@ -10,8 +10,9 @@ public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.splashScreenTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+
 
         Intent intent = new Intent(this, NotesListActivity.class);
         startActivity(intent);
