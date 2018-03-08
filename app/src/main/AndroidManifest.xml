@@ -31,21 +31,6 @@
         <activity
             android:name=".NewNoteActivity"
             android:label="New Note" />
-        <activity
-            android:name=".PinActivity"
-            android:label=""
-            android:theme="@android:style/Theme.NoTitleBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/settings" />
 
     </application>
 
