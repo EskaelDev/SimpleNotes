@@ -1,11 +1,9 @@
 package com.example.tomek.simplenotes;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,17 +11,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class NotesListActivity extends AppCompatActivity {
 
     private ListView notesList;
+    ArrayList<Note> notes;
+    //    String sortType;
 
-    @Override
+    boolean sorted;
+    //    enum SortType {
+//        ASC, DESC, COL, AZ, ZA
+//    }
+//
+//    SortType sortType;
+    String sortingType;
+
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
@@ -31,7 +39,10 @@ public class NotesListActivity extends AppCompatActivity {
 
         notesList = findViewById(R.id.notes_list);
         registerForContextMenu(notesList);
+//        sortType = SortType.ASC;
 
+        sortingType = getIntent().getStringExtra("sorttype");
+        sorted = getIntent().getBooleanExtra("issorted", true);
     }
 
     @Override
@@ -48,7 +59,38 @@ public class NotesListActivity extends AppCompatActivity {
                 noteIntent.putExtra("action", "New Note");
                 startActivity(noteIntent);
                 break;
-            case R.id.action_settings:
+            case R.id.action_sort:
+                PopupMenu popup = new PopupMenu(getApplicationContext(), findViewById(R.id.action_sort));
+                popup.getMenuInflater().inflate(R.menu.menu_sort_option, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+//                        sorted=false;
+//                        Toast.makeText(NotesListActivity.this, String.valueOf(item.getItemId()), Toast.LENGTH_SHORT).show();
+                        switch (item.getItemId()) {
+                            case R.id.sort_date_asc:
+                                RefreshSorted("asc");
+                                break;
+                            case R.id.sort_date_desc:
+                                RefreshSorted("desc");
+                                break;
+                            case R.id.sort_colors:
+                                RefreshSorted("col");
+                                break;
+                            case R.id.sort_title_AZ:
+                                RefreshSorted("az");
+                                break;
+                            case R.id.sort_title_ZA:
+                                RefreshSorted("za");
+                                break;
+                        }
+
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
+
 //                Intent settingsIntent = new Intent(this, SettingsActivity.class);
 //                startActivity(settingsIntent);
                 break;
@@ -60,12 +102,14 @@ public class NotesListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         notesList.setAdapter(null);
-        ArrayList<Note> notes = FileIO.LoadNotes(this);
-
+        notes = FileIO.LoadNotes(this);
         if (notes == null || notes.size() == 0) {
             Toast.makeText(this, "No saved notes", Toast.LENGTH_SHORT).show();
             return;
         } else {
+            if (!sorted)
+                SortNotesBy(sortingType);
+
             NoteAdapter noteAdapter = new NoteAdapter(this, R.layout.item_note, notes);
             notesList.setAdapter(noteAdapter);
 
@@ -81,6 +125,7 @@ public class NotesListActivity extends AppCompatActivity {
                     startActivity(editNoteIntent);
                 }
             });
+
 
 //            notesList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //                @Override
@@ -164,10 +209,38 @@ public class NotesListActivity extends AppCompatActivity {
 
     }
 
-    private void DuplicateNote(Note note){
-        Note newNote = new Note(note.getTitle(), note.getContent(),  Calendar.getInstance().getTime(), note.getColor());
+    private void DuplicateNote(Note note) {
+        Note newNote = new Note(note.getTitle(), note.getContent(), Calendar.getInstance().getTime(), note.getColor());
         FileIO.SaveNote(this, newNote);
         recreate();
     }
 
+    private void SortNotesBy(String sortType) {
+        switch (sortType) {
+            case "asc":
+                Collections.sort(notes, new CompareNoteDateASC());
+                break;
+            case "desc":
+                Collections.sort(notes, new CompareNoteDateDESC());
+                break;
+            case "col":
+                Collections.sort(notes, new CompareNoteColor());
+                break;
+            case "az":
+                Collections.sort(notes, new CompareNoteTitleAZ());
+                break;
+            case "za":
+                Collections.sort(notes, new CompareNoteTitleAZ());
+                Collections.reverse(notes);
+                break;
+        }
+    }
+
+    private void RefreshSorted(String sortType) {
+        Intent intent = new Intent(this, NotesListActivity.class);
+        intent.putExtra("sorttype", sortType);
+        intent.putExtra("issorted", false);
+        startActivity(intent);
+        finish();
+    }
 }

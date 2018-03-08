@@ -9,4 +9,9 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="share">Share</string>
+    <string name="date_asc">Date Asc</string>
+    <string name="date_desc">Date Desc</string>
+    <string name="colors">Colors</string>
+    <string name="title_a_z">Title A-Z</string>
+    <string name="title_z_a">Title Z-A</string>
 </resources>

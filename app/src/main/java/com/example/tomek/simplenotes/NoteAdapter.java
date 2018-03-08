@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import static android.content.ContentValues.TAG;
 
@@ -29,6 +30,11 @@ public class NoteAdapter extends ArrayAdapter<Note> {
     public NoteAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Note> objects) {
         super(context, resource, objects);
         this.context = context;
+    }
+
+    @Override
+    public void sort(@NonNull Comparator<? super Note> comparator) {
+        super.sort(comparator);
     }
 
     @NonNull
@@ -71,18 +77,10 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             date.setText(dateFormat.format(note.getSaveDate()));
             date.append("  ");
             date.append(timeFormat.format(note.getSaveDate()));
-//            if (note.getContent().length() > Constants.MAX_NOTE_CONTENT_LENGTH) {
-//                if (note.getContent().charAt(Constants.MAX_NOTE_CONTENT_LENGTH - 1) == ' ') {
-//                    content.setText(note.getContent().substring(0, Constants.MAX_NOTE_CONTENT_LENGTH - 1));
-//                    content.append("[...]");
-//                } else {
-//                    content.setText(note.getContent().substring(0, Constants.MAX_NOTE_CONTENT_LENGTH));
-//                    content.append("[...]");
-//                }
-//            } else
+
                 content.setText(note.getContent());
         }
-//        return super.getView(position, convertView, parent);
+
         return convertView;
     }
 }

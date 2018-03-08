@@ -1,6 +1,7 @@
 package com .example.tomek.simplenotes;
 
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -55,4 +56,5 @@ public class Note implements Serializable{
     public void setColor(String color) {
         this.color = color;
     }
+
 }

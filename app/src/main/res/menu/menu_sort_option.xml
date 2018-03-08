@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/sort_date_asc"
+        android:title="@string/date_asc" />
+
+    <item
+        android:id="@+id/sort_date_desc"
+        android:title="@string/date_desc" />
+
+    <item
+        android:id="@+id/sort_colors"
+        android:title="@string/colors" />
+
+    <item
+        android:id="@+id/sort_title_AZ"
+        android:title="@string/title_a_z" />
+    <item
+        android:id="@+id/sort_title_ZA"
+        android:title="@string/title_z_a" />
+
+</menu>
